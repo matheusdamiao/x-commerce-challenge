@@ -9,19 +9,66 @@ export function makeServer({ environment = "test" } = {}) {
     },
 
     seeds(server) {
-      server.create("product", {
-        name: "Iphone 14",
-        code: "MLB123456",
-        sales: 30,
-        price: 8000,
-        stock: 3,
-      });
-      server.create("product", {
-        name: "Motorola G10",
-        code: "MLB123456",
-        sales: 10,
-        price: 500,
-        stock: 8,
+      // server.create("product", {
+      //   name: "Iphone 14",
+      //   code: "MLB123456",
+      //   sales: 30,
+      //   price: 8000,
+      //   stock: 3,
+      // });
+      // server.create("product", {
+      //   name: "Motorola G10",
+      //   code: "MLB123456",
+      //   sales: 10,
+      //   price: 500,
+      //   stock: 8,
+      // });
+      server.db.loadData({
+        products: [
+          // {
+          //   name: "Motorola G10",
+          //   code: "MLB123456",
+          //   sales: 10,
+          //   price: 500,
+          //   stock: 8,
+          // },
+          {
+            name: "Kit 10 Un. Adesivo 3m Porta Cartão De Silicone Para Celular",
+            code: "MLB2063247364",
+            sales: 150,
+            price: 31.67,
+            stock: 0,
+          },
+          {
+            name: "Kit 10 Un. Adesivo 3m Porta Cartão De Silicone Para Celular",
+            code: "MLB2063247364",
+            sales: 150,
+            price: 31.67,
+            stock: 0,
+          },
+          {
+            name: "Kit 10 Un. Adesivo 3m Porta Cartão De Silicone Para Celular",
+            code: "MLB2063247364",
+            sales: 150,
+            price: 31.67,
+            stock: 0,
+          },
+          {
+            name: "Kit 10 Un. Adesivo 3m Porta Cartão De Silicone Para Celular",
+            code: "MLB2063247364",
+            sales: 150,
+            price: 31.67,
+            stock: 0,
+          },
+          {
+            name: "Kit 10 Un. Adesivo 3m Porta Cartão De Silicone Para Celular",
+            code: "MLB2063247364",
+            sales: 150,
+            price: 31.67,
+            stock: 0,
+          },
+        ],
+        favorites: [],
       });
     },
 
