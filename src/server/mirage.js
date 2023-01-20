@@ -81,6 +81,12 @@ export function makeServer({ environment = "test" } = {}) {
       this.get("/products", (schema) => {
         return schema.products.all();
       });
+
+      this.post("/products", (schema, request) => {
+        let attrs = JSON.parse(request.requestBody);
+        console.log(attrs);
+        return schema.products.create(attrs);
+      });
     },
   });
   return server;
