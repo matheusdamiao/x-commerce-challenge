@@ -1,26 +1,16 @@
 import { useEffect, useState } from "react";
+import Header from "./../components/Header";
+import AllProducts from "./../components/AllProducts";
+import { WrapperContent } from "@/styles/Home/style";
 
 export default function Home() {
-  const [allProducts, setAllProducts] = useState([]);
-
-  useEffect(() => {
-    fetch("/api/products")
-      .then((res) => res.json())
-      .then((json) => setAllProducts(json.products));
-  }, []);
-
   return (
-    <>
-      <div>
-        {allProducts.map((product) => {
-          return (
-            <div key={product.id}>
-              <li>{product.name}</li>
-              <p>$ {product.price}</p>
-            </div>
-          );
-        })}
-      </div>
-    </>
+    <div>
+      <Header />
+      <WrapperContent>
+        <AllProducts />
+      </WrapperContent>
+      <div></div>
+    </div>
   );
 }
