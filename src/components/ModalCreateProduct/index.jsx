@@ -1,6 +1,7 @@
 import { AppContext } from "@/context/context";
 import { createProduct, getAllProducts } from "@/Utils/api";
-import React, { useContext, useRef, useState } from "react";
+import useSWR from "swr";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import {
   Wrapper,
   Title,
@@ -8,6 +9,7 @@ import {
   InputWrapper,
   CreateBtn,
 } from "./style";
+import { toast } from "react-hot-toast";
 
 const index = ({ setIsModalOpen }) => {
   const [productValue, setProductValue] = useState({
@@ -17,9 +19,9 @@ const index = ({ setIsModalOpen }) => {
     price: "",
     stock: "",
   });
-  const { Products } = useContext(AppContext);
+  const context = useContext(AppContext);
   // Local state and its update function
-  const [allProducts, setAllproducts] = Products;
+  const { allProducts, setAllproducts } = context;
   // Server state to be mutated after post request
   const { data } = useSWR("/api/products", getAllProducts);
 
@@ -29,11 +31,22 @@ const index = ({ setIsModalOpen }) => {
     e.preventDefault();
 
     try {
-      await createProduct(productValue);
-    } catch {
-      console.log("Ocorreu um erro");
+      const newProduct = await createProduct(productValue);
+      if (newProduct.product) {
+        setIsModalOpen(false);
+        toast.success("Produto criado!");
+        console.log(allProducts);
+        await setAllproducts((prev) => [...prev, { ...newProduct.product }]);
+      }
+    } catch (e) {
+      setIsModalOpen(false);
+      toast.error("Ops, ocorreu algum erro. Tente novamente");
     }
   };
+
+  useEffect(() => {
+    setAllproducts([data]);
+  }, []);
 
   const updateInput = (e) => {
     const name = e.target.name;

@@ -47,4 +47,5 @@ export const CreateBtn = styled.button`
   padding: 10px 30px;
   border: none;
   border-radius: 9px;
+  cursor: pointer;
 `;
