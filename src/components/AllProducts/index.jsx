@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import useSWR from "swr";
 import { BsHeart, BsSuitHeartFill } from "react-icons/bs";
 import {
@@ -13,12 +13,10 @@ import {
   TableData,
 } from "./style";
 import { getAllProducts } from "@/Utils/api";
+import { AppContext } from "@/context/context";
 
 const index = () => {
-  const [allProducts, setAllProducts] = useState([]);
   const [isFavorite, setIsFavorite] = useState(false);
-
-  // const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
   const { data, error, isLoading } = useSWR("/api/products", getAllProducts);
 
