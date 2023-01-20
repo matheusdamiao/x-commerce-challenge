@@ -1,14 +1,14 @@
-export const getAllProducts = (...args) => {
-  return fetch(...args).then((res) => res.json());
+export const getAllProducts = async (...args) => {
+  return await fetch(...args).then((res) => res.json());
 };
 
 export const createProduct = async (product) => {
   let info = {
     name: product.name,
     code: product.code,
-    sales: product.sales,
-    price: product.price,
-    stock: product.stock,
+    sales: Number(product.sales),
+    price: Number(product.price),
+    stock: Number(product.stock),
   };
 
   const res = await fetch("/api/products/", {
@@ -17,7 +17,8 @@ export const createProduct = async (product) => {
     body: JSON.stringify(info),
   });
 
-  const data = await res.json();
-  console.log(data);
-  return data;
+  if (res.status === 201) {
+    const data = await res.json();
+    return data;
+  }
 };
