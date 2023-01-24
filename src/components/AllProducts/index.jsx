@@ -18,7 +18,17 @@ import { AppContext } from "@/context/context";
 const index = () => {
   const [isFavorite, setIsFavorite] = useState(false);
 
+  const context = useContext(AppContext);
+  // Local state and its update function
+  const { allProducts, setAllproducts } = context;
+
   const { data, error, isLoading } = useSWR("/api/products", getAllProducts);
+
+  // every time data is updated, we also update our local state
+  useEffect(() => {
+    setAllproducts([data]);
+    console.log(data);
+  }, [data]);
 
   if (error)
     return (
