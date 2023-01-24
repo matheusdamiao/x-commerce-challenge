@@ -1,6 +1,6 @@
 import { AppContext } from "@/context/context";
 import { createProduct, getAllProducts } from "@/Utils/api";
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import {
   Wrapper,
@@ -19,11 +19,11 @@ const index = ({ setIsModalOpen }) => {
     price: "",
     stock: "",
   });
-  const context = useContext(AppContext);
-  // Local state and its update function
-  const { allProducts, setAllproducts } = context;
+
   // Server state to be mutated after post request
   const { data } = useSWR("/api/products", getAllProducts);
+
+  const [newProduct, setNewProduct] = useState({});
 
   const modal = useRef();
 
@@ -33,20 +33,16 @@ const index = ({ setIsModalOpen }) => {
     try {
       const newProduct = await createProduct(productValue);
       if (newProduct.product) {
+        setNewProduct(newProduct);
         setIsModalOpen(false);
+        mutate("/api/products", { ...data, newProduct });
         toast.success("Produto criado!");
-        console.log(allProducts);
-        await setAllproducts((prev) => [...prev, { ...newProduct.product }]);
       }
     } catch (e) {
       setIsModalOpen(false);
       toast.error("Ops, ocorreu algum erro. Tente novamente");
     }
   };
-
-  useEffect(() => {
-    setAllproducts([data]);
-  }, []);
 
   const updateInput = (e) => {
     const name = e.target.name;
