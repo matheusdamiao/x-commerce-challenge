@@ -25,6 +25,7 @@ export const createProduct = async (product) => {
 
 export const createFavoriteProduct = async (product) => {
   let info = {
+    id: product.id,
     name: product.name,
     code: product.code,
     sales: Number(product.sales),
