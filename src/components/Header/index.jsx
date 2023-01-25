@@ -8,7 +8,7 @@ import {
 } from "./style";
 import ModalCreateProduct from "./../ModalCreateProduct";
 
-const index = () => {
+const index = ({ displayAllProducts, setDisplayAllProducts }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
@@ -20,8 +20,10 @@ const index = () => {
         </CentralHeader>
         <ButtonsHeader>
           <div>
-            <button>Todos</button>
-            <button>Favoritos</button>
+            <button onClick={() => setDisplayAllProducts(true)}>Todos</button>
+            <button onClick={() => setDisplayAllProducts(false)}>
+              Favoritos
+            </button>
           </div>
           <button onClick={() => setIsModalOpen(true)}>Criar novo</button>
         </ButtonsHeader>
