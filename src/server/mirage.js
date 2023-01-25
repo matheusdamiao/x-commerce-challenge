@@ -6,6 +6,7 @@ export function makeServer({ environment = "test" } = {}) {
 
     models: {
       product: Model,
+      favorite: Model,
     },
 
     seeds(server) {
@@ -47,7 +48,15 @@ export function makeServer({ environment = "test" } = {}) {
             stock: 0,
           },
         ],
-        favorites: [],
+        favorites: [
+          {
+            name: "Kit 10 Un. Adesivo 3m Porta Cartão De Silicone Para Celular",
+            code: "MLB2063247364",
+            sales: 150,
+            price: 31.67,
+            stock: 0,
+          },
+        ],
       });
     },
 
@@ -65,6 +74,15 @@ export function makeServer({ environment = "test" } = {}) {
         let attrs = JSON.parse(request.requestBody);
         console.log(attrs);
         return schema.products.create(attrs);
+      });
+
+      this.get("/favorites", (schema) => {
+        return schema.favorites.all();
+      });
+
+      this.post("/favorites", (schema, request) => {
+        let attrs = JSON.parse(request.requestBody);
+        return schema.favorites.create(attrs);
       });
     },
   });
