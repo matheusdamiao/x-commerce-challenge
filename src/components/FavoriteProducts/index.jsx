@@ -12,7 +12,7 @@ import {
   TableRowHeader,
   Title,
 } from "../AllProducts/style";
-import { BsHeart, BsSuitHeartFill } from "react-icons/bs";
+import FavoriteProduct from "./../FavoriteProduct/index.jsx";
 
 import { Wrapper } from "./style";
 
@@ -21,7 +21,6 @@ const index = () => {
   const { Products, FavoriteProducts } = context;
   const { allFavoriteProducts, setAllFavoriteProducts } = FavoriteProducts;
   const { data, error, isLoading } = useSWR("/api/favorites", getAllProducts);
-  const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
     setAllFavoriteProducts([data]);
@@ -66,21 +65,7 @@ const index = () => {
                   <TableData>{product.sales} vendas</TableData>
                   <TableData>{product.stock} und</TableData>
                   <TableData>
-                    {isFavorite && (
-                      <BsSuitHeartFill
-                        stroke="black"
-                        size="20"
-                        style={{ color: "red" }}
-                        onClick={() => deleteFavorite(product)}
-                      />
-                    )}
-                    {!isFavorite && (
-                      <BsHeart
-                        size="20"
-                        style={{ cursor: "pointer", stroke: "10" }}
-                        onClick={() => addFavorite(product)}
-                      />
-                    )}
+                    <FavoriteProduct product={product} />
                   </TableData>
                 </TableRow>
               );
