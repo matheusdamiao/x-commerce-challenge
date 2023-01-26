@@ -1,5 +1,9 @@
 import { AppContext } from "@/context/context";
-import { createFavoriteProduct, getAllProducts } from "@/Utils/api";
+import {
+  createFavoriteProduct,
+  deleteFavoriteProduct,
+  getAllProducts,
+} from "@/Utils/api";
 import React, { useContext, useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { BsHeart, BsSuitHeartFill } from "react-icons/bs";
@@ -12,7 +16,7 @@ const index = ({ product }) => {
   const { allFavoriteProducts, setAllFavoriteProducts } = FavoriteProducts;
   const { data: favorites } = useSWR("/api/favorites", getAllProducts);
 
-  const [isFavorite, setIsFavorite] = useState(null);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   // functions
   const addFavorite = async (prod) => {
@@ -22,16 +26,23 @@ const index = ({ product }) => {
       if (favoriteProduct.favorite) {
         await mutate("/api/favorites", { ...favorites, favoriteProduct });
         toast.success("Produto favoritado!");
-        setIsFavorite(true);
+      }
+    } catch (e) {
+      toast.error("Ops, ocorreu algum erro. Tente novamente favorito");
+    }
+  };
+
+  const deleteFavorite = async (name) => {
+    try {
+      const deleteFavorite = await deleteFavoriteProduct(name);
+      if (deleteFavorite) {
+        await mutate("/api/favorites", { ...favorites });
+        toast.success("Produto removido dos favoritos!");
+        console.log(isFavorite);
       }
     } catch (e) {
       toast.error("Ops, ocorreu algum erro. Tente novamente");
     }
-  };
-
-  const deleteFavorite = async (prod) => {
-    try {
-    } catch (error) {}
   };
 
   useEffect(() => {
@@ -40,15 +51,17 @@ const index = ({ product }) => {
   }, [favorites]);
 
   //render component logic:
-  // if the product is inside favorites array from database, render
-  // a red heart icon, otherwise render an empty heart icon
+  // if one of the favorite products' name inside favorites array matches the product's name we're receiving as props,
+  // render a red heart icon, otherwise render an empty heart icon.
   const isProductFavorite = async (prod, fav) => {
     const allFavorites = await fav;
     console.log(prod);
     if (allFavorites !== undefined) {
-      let checkProduct = allFavorites.favorites.some((e) => e.id === prod.id);
-      console.log(checkProduct);
-      if (checkProduct === true) {
+      let isProductFavorite = allFavorites.favorites.some(
+        (e) => e.name === prod.name
+      );
+      console.log(isProductFavorite);
+      if (isProductFavorite === true) {
         setIsFavorite(true);
       } else {
         setIsFavorite(false);
@@ -63,8 +76,8 @@ const index = ({ product }) => {
         <BsSuitHeartFill
           stroke="black"
           size="20"
-          style={{ color: "red" }}
-          onClick={() => deleteFavorite(product)}
+          style={{ color: "red", cursor: "pointer" }}
+          onClick={() => deleteFavorite(product.name)}
         />
       ) : (
         <BsHeart
