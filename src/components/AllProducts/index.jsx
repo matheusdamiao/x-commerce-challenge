@@ -28,7 +28,7 @@ const index = () => {
 
   const { data: favorites } = useSWR("/api/favorites", getAllProducts);
 
-  // every time data is updated, we also update our local state
+  // every time data is updated, we also update our global state
   useEffect(() => {
     setAllproducts([data]);
     // console.log(data?.products);
@@ -36,7 +36,7 @@ const index = () => {
 
   useEffect(() => {
     setAllFavoriteProducts([favorites]);
-    console.log(favorites?.favorites);
+    // console.log(favorites?.favorites);
   }, [favorites]);
 
   if (error)
@@ -106,7 +106,9 @@ const index = () => {
               );
             })
           ) : (
-            <TableData> No products </TableData>
+            <TableRow>
+              <TableData> No products </TableData>
+            </TableRow>
           )}
         </TableBody>
       </Table>
