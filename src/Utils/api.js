@@ -25,7 +25,7 @@ export const createProduct = async (product) => {
 
 export const createFavoriteProduct = async (product) => {
   let info = {
-    id: product.id,
+    // id: product.id,
     name: product.name,
     code: product.code,
     sales: Number(product.sales),
@@ -43,5 +43,20 @@ export const createFavoriteProduct = async (product) => {
     const data = await res.json();
     console.log(data);
     return data;
+  }
+};
+
+export const deleteFavoriteProduct = async (productName) => {
+  let name = productName;
+
+  const res = await fetch(`/api/favorites/${name}`, {
+    method: "DELETE",
+    headers: { "Content-type": "application/json;charset=UTF-8" },
+  });
+
+  if (res.status === 204) {
+    return res;
+  } else {
+    throw new Error("Ocorreu um erro");
   }
 };
