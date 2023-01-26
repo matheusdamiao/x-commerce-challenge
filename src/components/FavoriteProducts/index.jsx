@@ -18,7 +18,7 @@ import { Wrapper } from "./style";
 
 const index = () => {
   const context = useContext(AppContext);
-  const { Products, FavoriteProducts } = context;
+  const { FavoriteProducts } = context;
   const { allFavoriteProducts, setAllFavoriteProducts } = FavoriteProducts;
   const { data, error, isLoading } = useSWR("/api/favorites", getAllProducts);
 
@@ -28,7 +28,7 @@ const index = () => {
   }, [data]);
 
   if (error) {
-    return <Wrapper>Deu erro</Wrapper>;
+    return <Wrapper>Ops, aconteceu um erro</Wrapper>;
   }
 
   if (isLoading) {
@@ -71,7 +71,9 @@ const index = () => {
               );
             })
           ) : (
-            <TableData> No favorite products </TableData>
+            <TableRow>
+              <TableData> No favorite products </TableData>
+            </TableRow>
           )}
         </TableBody>
       </Table>
