@@ -84,6 +84,11 @@ export function makeServer({ environment = "test" } = {}) {
         let attrs = JSON.parse(request.requestBody);
         return schema.favorites.create(attrs);
       });
+
+      this.delete("/favorites/:name", (schema, request) => {
+        let name = request.params.name;
+        return schema.favorites.findBy({ name: `${name}` }).destroy();
+      });
     },
   });
   return server;
