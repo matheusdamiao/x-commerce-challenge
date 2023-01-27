@@ -43,20 +43,42 @@ export const ButtonsHeader = styled.div`
     display: flex;
     gap: 15px;
   }
+`;
 
-  button {
-    background-color: #d32811;
-    color: white;
-    padding: 8px 10px;
-    border-radius: 8px;
-    border: none;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 20px;
-    cursor: pointer;
-  }
+export const ShowAllProducts = styled.button`
+  background-color: ${(props) =>
+    props.displayAllProducts === true ? "red" : "rgba(211, 40, 17, 0.5)"};
+  color: white;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: none;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  cursor: pointer;
+`;
 
-  button:disabled {
-    background-color: rgba(211, 40, 17, 0.5);
-  }
+export const ShowFavorites = styled.button`
+  background-color: ${(props) =>
+    props.displayAllProducts === false ? "red" : "rgba(211, 40, 17, 0.5)"};
+  color: white;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: none;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  cursor: pointer;
+`;
+
+export const CreateProduct = styled.button`
+  background-color: #d32811;
+  color: white;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: none;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  cursor: pointer;
 `;
