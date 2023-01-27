@@ -36,6 +36,7 @@ const index = ({ setIsModalOpen }) => {
         setNewProduct(newProduct);
         setIsModalOpen(false);
         mutate("/api/products", { ...data, newProduct });
+        mutate("/api/productsPaginated", { ...data });
         toast.success("Produto criado!");
       }
     } catch (e) {
@@ -58,7 +59,7 @@ const index = ({ setIsModalOpen }) => {
       ref={modal}
       onClick={(e) => e.target == modal.current && setIsModalOpen(false)}
     >
-      <WrapperContent onSubmit={handleSubmit}>
+      <WrapperContent aria-modal="true" role="dialog" onSubmit={handleSubmit}>
         <Title>Create new Product</Title>
         <InputWrapper>
           <label>Name: </label>
@@ -121,7 +122,9 @@ const index = ({ setIsModalOpen }) => {
           <span></span>
         </InputWrapper>
 
-        <CreateBtn type="submit">CREATE PRODUCT</CreateBtn>
+        <CreateBtn type="submit" role="button">
+          CREATE PRODUCT
+        </CreateBtn>
       </WrapperContent>
     </Wrapper>
   );
