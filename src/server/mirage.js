@@ -47,6 +47,20 @@ export function makeServer({ environment = "test" } = {}) {
             price: 31.67,
             stock: 0,
           },
+          {
+            name: "Kit 10 Un. Adesivo 3m Porta Cartão De Silicone Para Celular",
+            code: "MLB2063247364",
+            sales: 150,
+            price: 31.67,
+            stock: 0,
+          },
+          {
+            name: "Kit 10 Un. Adesivo 3m Porta Cartão De Silicone Para Celular",
+            code: "MLB2063247364",
+            sales: 150,
+            price: 31.67,
+            stock: 0,
+          },
         ],
         favorites: [
           {
@@ -68,6 +82,33 @@ export function makeServer({ environment = "test" } = {}) {
 
       this.get("/products", (schema) => {
         return schema.products.all();
+      });
+
+      this.get(`/productsPaginated`, (schema, request) => {
+        let page = parseInt(request.queryParams.page);
+        let limit = parseInt(request.queryParams.limit);
+        let startIndex = (page - 1) * limit;
+        let endIndex = page * limit;
+        let allProducts = schema.db.products;
+        let sortedProducts = allProducts.sort((a, b) => b.sales - a.sales);
+        let result = sortedProducts.slice(startIndex, endIndex);
+
+        //check if there's some product left.
+        // if there is, add one more page to the total pages,
+        // otherwise set total pages to be the division between all products and the page's limit
+        let productsLeft = allProducts.length % limit;
+        let totalPages;
+        if (!productsLeft) {
+          totalPages = Math.floor(allProducts.length / limit);
+        } else {
+          totalPages = Math.floor(allProducts.length / limit) + 1;
+        }
+
+        let data = {
+          result,
+          totalPages,
+        };
+        return data;
       });
 
       this.post("/products", (schema, request) => {
