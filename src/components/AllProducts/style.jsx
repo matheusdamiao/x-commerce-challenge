@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
   height: 900px;
+  width: fit-content;
 `;
 
 export const Title = styled.h2`
@@ -52,6 +53,16 @@ export const TableRow = styled.tr`
     flex-wrap: wrap;
     align-items: flex-start;
     justify-content: center;
+  }
+
+  > #sold {
+    color: rgba(107, 113, 131, 1);
+
+    > p {
+      font-weight: 700;
+      margin: 0;
+      margin-bottom: 5px;
+    }
   }
 `;
 
