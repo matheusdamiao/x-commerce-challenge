@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Pages, WrapperHeader } from "../MostSoldProducts/style.jsx";
 
 export const Wrapper = styled.div`
   height: 900px;
@@ -18,7 +19,6 @@ export const Table = styled.table`
   max-height: 700px;
   margin-left: 30px;
   margin-right: 30px;
-  margin-bottom: 56px;
   border-collapse: collapse;
 
   @media screen and (max-width: 800px) {
@@ -105,4 +105,15 @@ export const TableData = styled.td`
     box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
   }
+`;
+
+export const PagesAllProducts = styled(Pages)`
+  margin-bottom: 40px;
+  margin-right: 50px;
+`;
+
+export const WrapperHeaderProducts = styled(WrapperHeader)`
+  width: 90%;
+  justify-content: space-between;
+  margin-left: 20px;
 `;
