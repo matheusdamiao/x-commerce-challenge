@@ -5,6 +5,9 @@ import {
   TopBar,
   CentralHeader,
   ButtonsHeader,
+  ShowAllProducts,
+  ShowFavorites,
+  CreateProduct,
 } from "./style";
 import ModalCreateProduct from "./../ModalCreateProduct";
 
@@ -20,12 +23,24 @@ const index = ({ displayAllProducts, setDisplayAllProducts }) => {
         </CentralHeader>
         <ButtonsHeader>
           <div>
-            <button onClick={() => setDisplayAllProducts(true)}>Todos</button>
-            <button onClick={() => setDisplayAllProducts(false)}>
+            <ShowAllProducts
+              displayAllProducts={displayAllProducts}
+              role="button"
+              onClick={() => setDisplayAllProducts(true)}
+            >
+              Todos
+            </ShowAllProducts>
+            <ShowFavorites
+              displayAllProducts={displayAllProducts}
+              role="button"
+              onClick={() => setDisplayAllProducts(false)}
+            >
               Favoritos
-            </button>
+            </ShowFavorites>
           </div>
-          <button onClick={() => setIsModalOpen(true)}>Criar novo</button>
+          <CreateProduct role="button" onClick={() => setIsModalOpen(true)}>
+            Criar novo
+          </CreateProduct>
         </ButtonsHeader>
       </WrapperContent>
       {isModalOpen && <ModalCreateProduct setIsModalOpen={setIsModalOpen} />}
