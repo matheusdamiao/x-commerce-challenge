@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   WrapperMostSoldProducts,
   Title,
@@ -11,15 +11,24 @@ import {
   Image,
   Values,
   Name,
+  Pages,
 } from "./style";
 import useSWR from "swr";
-import { getAllProducts, getMostSoldProducts } from "@/Utils/api";
+import { getAllProducts } from "@/Utils/api";
 
 const index = () => {
-  const { data, error, isLoading, mutate } = useSWR(
-    "/api/products",
+  const { data: products } = useSWR("/api/products", getAllProducts);
+
+  const [pageIndex, setPageIndex] = useState(1);
+  const { data, mutate, error, isLoading } = useSWR(
+    `/api/productsPaginated?page=${pageIndex}&limit=6`,
     getAllProducts
   );
+
+  useEffect(() => {
+    // make a new request to the api whenever products' database is changed
+    mutate(`/api/productsPaginated?page=${pageIndex}&limit=6`);
+  }, [products]);
 
   if (error) {
     return (
@@ -56,33 +65,46 @@ const index = () => {
       <WrapperHeader>
         <Title>Mais vendidos</Title>
         <PageButtons>
-          <ArrowLeft />
-          <ArrowRight />
+          <ArrowLeft
+            onClick={
+              pageIndex !== 1
+                ? () => setPageIndex(pageIndex - 1)
+                : () => setPageIndex(data?.totalPages)
+            }
+          />
+          <ArrowRight
+            onClick={
+              data?.totalPages !== pageIndex
+                ? () => setPageIndex(pageIndex + 1)
+                : () => setPageIndex(1)
+            }
+          />
         </PageButtons>
       </WrapperHeader>
       <WrapperContent>
-        {data.products.length != 0 ? (
-          data.products
-            .sort((a, b) => b.sales - a.sales)
-            .map((product) => {
-              return (
-                <ProductCard>
-                  <Image>
-                    <img src="/logoPNG.png" alt="" />
-                  </Image>
-                  <Values>
-                    <p>R$ {product.price}</p>
-                    <small>{product.sales} vendas</small>
-                  </Values>
-                  <Name>{product.name}</Name>
-                </ProductCard>
-              );
-            })
+        {data?.result?.length != 0 ? (
+          data?.result?.map((product) => {
+            return (
+              <ProductCard key={product.id}>
+                <Image>
+                  <img src="/logoPNG.png" alt="" />
+                </Image>
+                <Values>
+                  <p>R$ {product.price}</p>
+                  <small>{product.sales} vendas</small>
+                </Values>
+                <Name>{product.name}</Name>
+              </ProductCard>
+            );
+          })
         ) : (
           <> Nenhum produto cadastrado! </>
         )}
       </WrapperContent>
-      <p>Pagination will come here</p>
+      <Pages>
+        {" "}
+        Página {pageIndex} de {data?.totalPages}
+      </Pages>
     </WrapperMostSoldProducts>
   );
 };
