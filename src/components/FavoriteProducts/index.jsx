@@ -63,7 +63,7 @@ const index = () => {
                   </TableData>
                   <TableData> $ {product.price}</TableData>
                   <TableData id="sold">
-                    <p>{Math.floor(product.price * product.sales)}</p>
+                    <p>Total de {Math.floor(product.price * product.sales)}</p>
                     <small>{product.sales} vendas</small>
                   </TableData>
                   <TableData>{product.stock} und</TableData>
