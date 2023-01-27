@@ -2,6 +2,6 @@ import styled from "styled-components";
 
 export const WrapperContent = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: flex-end;
+  justify-content: space-around;
+  flex-wrap: wrap;
 `;
