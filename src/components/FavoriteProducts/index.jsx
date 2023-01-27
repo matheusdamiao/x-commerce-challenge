@@ -38,21 +38,21 @@ const index = () => {
   return (
     <Wrapper>
       <Title>Todos os favoritos</Title>
-      <Table>
-        <TableHead>
-          <TableRowHeader>
-            <HeaderCell>IDENTIFICAÇÃO</HeaderCell>
-            <HeaderCell>PREÇO</HeaderCell>
-            <HeaderCell>VENDAS </HeaderCell>
-            <HeaderCell>ESTOQUE</HeaderCell>
+      <Table aria-label="FavoriteProducts" role="table">
+        <TableHead role="rowgroup">
+          <TableRowHeader role="row">
+            <HeaderCell role="columnheader">IDENTIFICAÇÃO</HeaderCell>
+            <HeaderCell role="columnheader">PREÇO</HeaderCell>
+            <HeaderCell role="columnheader">VENDAS </HeaderCell>
+            <HeaderCell role="columnheader">ESTOQUE</HeaderCell>
           </TableRowHeader>
         </TableHead>
-        <TableBody>
+        <TableBody role="rowgroup">
           {data.favorites.length != 0 ? (
             data.favorites.map((product) => {
               return (
-                <TableRow key={product.id}>
-                  <TableData id="identificacao">
+                <TableRow role="row" key={product.id}>
+                  <TableData role="cell" id="identificacao">
                     <div id="pictureBox">
                       <img src="/logoPNG.png" alt="" />
                     </div>
@@ -61,21 +61,24 @@ const index = () => {
                       <small>#{product.code}</small>
                     </div>
                   </TableData>
-                  <TableData> $ {product.price}</TableData>
-                  <TableData id="sold">
+                  <TableData role="cell"> $ {product.price}</TableData>
+                  <TableData role="cell" id="sold">
                     <p>Total de {Math.floor(product.price * product.sales)}</p>
                     <small>{product.sales} vendas</small>
                   </TableData>
-                  <TableData>{product.stock} und</TableData>
-                  <TableData>
+                  <TableData role="cell">{product.stock} und</TableData>
+                  <TableData role="cell">
                     <FavoriteProduct product={product} />
                   </TableData>
                 </TableRow>
               );
             })
           ) : (
-            <TableRow>
-              <TableData> No favorite products </TableData>
+            <TableRow role="row">
+              <TableData role="cell">
+                {" "}
+                Você ainda não possui produtos favoritados.{" "}
+              </TableData>
             </TableRow>
           )}
         </TableBody>
