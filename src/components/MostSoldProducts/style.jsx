@@ -26,17 +26,20 @@ export const Title = styled.h2`
 `;
 
 export const PageButtons = styled.div`
-  display: inline;
+  display: flex;
   margin-bottom: 34px;
   margin-top: 85px;
+  gap: 18px;
 `;
 
 export const ArrowRight = styled(HiArrowRight)`
   color: rgba(35, 94, 231, 1);
+  cursor: pointer;
 `;
 
 export const ArrowLeft = styled(HiArrowLeft)`
   color: rgba(35, 94, 231, 1);
+  cursor: pointer;
 `;
 
 export const WrapperContent = styled.div`
@@ -59,7 +62,9 @@ export const Image = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  /* border: 1px solid red; */
+  background: #ffffff;
+  box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
 
   > img {
     width: 120px;
@@ -94,4 +99,13 @@ export const Name = styled.p`
   margin-top: 5px;
   color: rgba(35, 94, 231, 1);
   font-weight: 600;
+`;
+
+export const Pages = styled.p`
+  text-align: right;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  color: rgba(99, 99, 99, 1);
+  font-weight: 500;
+  font-size: 14px;
 `;
