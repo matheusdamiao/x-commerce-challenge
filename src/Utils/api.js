@@ -60,3 +60,14 @@ export const deleteFavoriteProduct = async (productName) => {
     throw new Error("Ocorreu um erro");
   }
 };
+
+export const getMostSoldProducts = async (url) => {
+  const res = await fetch(url);
+  const data = await res.json();
+
+  if (!data) {
+    throw new Error("Ocorreu um erro");
+  }
+
+  return data;
+};
