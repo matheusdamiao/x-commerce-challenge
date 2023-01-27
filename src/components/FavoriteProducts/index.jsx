@@ -62,7 +62,10 @@ const index = () => {
                     </div>
                   </TableData>
                   <TableData> $ {product.price}</TableData>
-                  <TableData>{product.sales} vendas</TableData>
+                  <TableData id="sold">
+                    <p>{Math.floor(product.price * product.sales)}</p>
+                    <small>{product.sales} vendas</small>
+                  </TableData>
                   <TableData>{product.stock} und</TableData>
                   <TableData>
                     <FavoriteProduct product={product} />
