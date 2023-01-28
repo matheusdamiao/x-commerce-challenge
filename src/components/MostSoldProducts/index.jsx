@@ -87,7 +87,7 @@ const index = () => {
             return (
               <ProductCard key={product.id}>
                 <Image>
-                  <img src="/logoPNG.png" alt="" />
+                  <img src="images/logoPNG.png" alt="" />
                 </Image>
                 <Values>
                   <p>R$ {product.price}</p>
