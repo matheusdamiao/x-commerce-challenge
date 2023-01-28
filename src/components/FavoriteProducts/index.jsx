@@ -12,7 +12,7 @@ import {
   TableRowHeader,
   Title,
 } from "../AllProducts/style";
-import FavoriteProduct from "./../FavoriteProduct/index.jsx";
+import FavoriteProduct from "../FavoriteProductButton/index.jsx";
 
 import { Wrapper } from "./style";
 
@@ -54,7 +54,7 @@ const index = () => {
                 <TableRow role="row" key={product.id}>
                   <TableData role="cell" id="identificacao">
                     <div id="pictureBox">
-                      <img src="/logoPNG.png" alt="" />
+                      <img src="images/logoPNG.png" alt="" />
                     </div>
                     <div id="nameAndCode">
                       <p>{product.name}</p>
