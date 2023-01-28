@@ -33,7 +33,7 @@ const index = () => {
   if (error)
     return (
       <Wrapper>
-        <Title>Busca com a palavra {searchValue}</Title>
+        <Title>Busca com a palavra "{searchValue}"</Title>
         <Table>
           <TableHead>
             <TableRowHeader>
@@ -51,7 +51,7 @@ const index = () => {
   if (isLoading)
     return (
       <Wrapper>
-        <Title>Busca com a palavra {searchValue}</Title>
+        <Title>Busca com a palavra "{searchValue}"</Title>
         <Table>
           <TableHead>
             <TableRowHeader>
