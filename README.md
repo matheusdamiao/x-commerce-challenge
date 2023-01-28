@@ -1,5 +1,8 @@
 # X-Commerce Challenge
 
+#### Atenção: este projeto foi feito para rodar em modo de desenvolvimento, pois suas requests estão acopladas ao servidor da biblioteca Mirage JS ####
+
+
 ## Rodando localmente
 
 Clone o projeto
@@ -26,7 +29,6 @@ Inicie o servidor
   npm run start
 ```
 
-#### Atenção: este projeto foi feito para rodar em modo de desenvolvimento, pois suas requests estão acopladas ao servidor da biblioteca Mirage JS ####
 
 
 
