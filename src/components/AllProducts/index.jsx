@@ -14,24 +14,17 @@ import {
   PagesAllProducts,
   TableData,
 } from "./style";
-import FavoriteProduct from "./../FavoriteProduct/index.jsx";
+import FavoriteProduct from "../FavoriteProductButton/index.jsx";
 import { getAllProducts } from "@/Utils/api";
 import { AppContext } from "@/context/context";
 import { ArrowLeft, ArrowRight, PageButtons } from "../MostSoldProducts/style";
 
 const index = () => {
-  const context = useContext(AppContext);
   // Local state and its update function
-  const { Products, FavoriteProducts } = context;
-  const { allProducts, setAllproducts } = Products;
-  const { allFavoriteProducts, setAllFavoriteProducts } = FavoriteProducts;
-
-  const { data: products } = useSWR("/api/products", getAllProducts);
-  const [pageIndex, setPageIndex] = useState(1);
-  const { data, error, isLoading, mutate } = useSWR(
-    `api/productsPaginated?page=${pageIndex}&limit=5`,
-    getAllProducts
-  );
+  // const context = useContext(AppContext);
+  // const { Products, FavoriteProducts } = context;
+  // const { allProducts, setAllproducts } = Products;
+  // const { allFavoriteProducts, setAllFavoriteProducts } = FavoriteProducts;
 
   // This is commented-out code, because right now we are not using our global state
   //
@@ -48,6 +41,13 @@ const index = () => {
   //   setAllFavoriteProducts([favorites]);
   //   // console.log(favorites?.favorites);
   // }, [favorites]);
+
+  const { data: products } = useSWR("/api/products", getAllProducts);
+  const [pageIndex, setPageIndex] = useState(1);
+  const { data, error, isLoading, mutate } = useSWR(
+    `api/productsPaginated?page=${pageIndex}&limit=5`,
+    getAllProducts
+  );
 
   useEffect(() => {
     // make a new request to the api whenever products' database is changed
@@ -124,7 +124,7 @@ const index = () => {
                 <TableRow role="row" key={product.id}>
                   <TableData role="cell" id="identificacao">
                     <div id="pictureBox">
-                      <img src="/logoPNG.png" alt="" />
+                      <img src="images/logoPNG.png" alt="" />
                     </div>
                     <div id="nameAndCode">
                       <p>{product.name}</p>
