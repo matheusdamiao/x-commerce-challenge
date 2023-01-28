@@ -10,6 +10,7 @@ import {
   CreateProduct,
 } from "./style";
 import ModalCreateProduct from "./../ModalCreateProduct";
+import SearchButton from "../SearchButton";
 
 const index = ({ displayAllProducts, setDisplayAllProducts }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -19,7 +20,7 @@ const index = ({ displayAllProducts, setDisplayAllProducts }) => {
       <WrapperContent>
         <TopBar>Logo</TopBar>
         <CentralHeader>
-          <h1>Produtos</h1>{" "}
+          <h1>Produtos</h1> <SearchButton />
         </CentralHeader>
         <ButtonsHeader>
           <div>

@@ -24,8 +24,9 @@ export const TopBar = styled.div`
 
 export const CentralHeader = styled.div`
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   height: 100%;
 
   h1 {
