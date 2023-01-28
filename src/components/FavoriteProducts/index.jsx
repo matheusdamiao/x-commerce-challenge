@@ -29,7 +29,7 @@ const index = () => {
   if (error)
     return (
       <Wrapper>
-        <Title>Todos os produtos</Title>
+        <Title> Favoritos</Title>
         <Table>
           <TableHead>
             <TableRowHeader>
@@ -46,7 +46,7 @@ const index = () => {
   if (isLoading)
     return (
       <Wrapper>
-        <Title>Todos os produtos</Title>
+        <Title> Favoritos</Title>
         <Table>
           <TableHead>
             <TableRowHeader>
@@ -59,7 +59,7 @@ const index = () => {
 
   return (
     <Wrapper>
-      <Title>Todos os favoritos</Title>
+      <Title> Favoritos</Title>
       <Table aria-label="FavoriteProducts" role="table">
         <TableHead role="rowgroup">
           <TableRowHeader role="row">
