@@ -6,6 +6,7 @@ export const Context = ({ children }) => {
   const [allProducts, setAllproducts] = useState([]);
   const [allFavoriteProducts, setAllFavoriteProducts] = useState([]);
   const [allMostSoldProducts, setAllMostSoldProducts] = useState([]);
+  const [searchValue, setSearchValue] = useState("");
 
   return (
     <AppContext.Provider
@@ -13,6 +14,7 @@ export const Context = ({ children }) => {
         Products: { allProducts, setAllproducts },
         FavoriteProducts: { allFavoriteProducts, setAllFavoriteProducts },
         MostSoldProducts: { allMostSoldProducts, setAllMostSoldProducts },
+        Search: { searchValue, setSearchValue },
       }}
     >
       {children}
