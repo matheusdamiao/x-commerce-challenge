@@ -11,10 +11,9 @@ import {
   TableRow,
   TableRowHeader,
   Title,
+  Wrapper,
 } from "../AllProducts/style";
 import FavoriteProduct from "../FavoriteProductButton/index.jsx";
-
-import { Wrapper } from "./style";
 
 const index = () => {
   const context = useContext(AppContext);
@@ -27,13 +26,36 @@ const index = () => {
     console.log(allFavoriteProducts);
   }, [data]);
 
-  if (error) {
-    return <Wrapper>Ops, aconteceu um erro</Wrapper>;
-  }
+  if (error)
+    return (
+      <Wrapper>
+        <Title>Todos os produtos</Title>
+        <Table>
+          <TableHead>
+            <TableRowHeader>
+              <HeaderCell>
+                {" "}
+                Ops, ocorreu algum erro na requisição ao servidor.
+              </HeaderCell>
+            </TableRowHeader>
+          </TableHead>
+        </Table>
+      </Wrapper>
+    );
 
-  if (isLoading) {
-    return <Wrapper>Carregando...</Wrapper>;
-  }
+  if (isLoading)
+    return (
+      <Wrapper>
+        <Title>Todos os produtos</Title>
+        <Table>
+          <TableHead>
+            <TableRowHeader>
+              <HeaderCell>carregando...</HeaderCell>
+            </TableRowHeader>
+          </TableHead>
+        </Table>
+      </Wrapper>
+    );
 
   return (
     <Wrapper>
