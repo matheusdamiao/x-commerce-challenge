@@ -22,10 +22,10 @@ Instale as dependências
   npm install
 ```
 
-Inicie o servidor
+Inicie o servidor de desenvolvimento
 
 ```bash
-  npm run start
+  npm run dev
 ```
 
 ## O Desafio:
